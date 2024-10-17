@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', CustomLoginView.as_view(), name='login'),  # 最初のページとしてログインページを表示
+    path('app/', include('app.urls')), 
 ]
+
