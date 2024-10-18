@@ -18,6 +18,30 @@
             <a href="{% url 'logout' %}">ログアウト</a>
         </div>
     </div>
-    <h1>ホームページへようこそ!</h1>
 </body>
+<body>
+    <h1>出席確認</h1>
+    
+    <div class="qr-container">
+        <!-- QRコードを表示 -->
+        <img src="data:image/png;base64,{{ qr_code }}" alt="QRコード">
+    </div>
+ 
+    <div class="message">QRコードを読み込んでください</div>
+    
+    <div class="datetime">
+        現在の時刻: {{ current_time }}
+    </div>
+    
+    <!-- 日時を更新するためのJavaScript -->
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const datetimeElement = document.querySelector('.datetime');
+            datetimeElement.textContent = '現在の時刻: ' + now.toLocaleString();
+        }
+        setInterval(updateTime, 1000);  // 1秒ごとに時間を更新
+    </script>
+</body>
+コンテキスト メニューあり
 </html>

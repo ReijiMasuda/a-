@@ -5,5 +5,5 @@ from django.contrib.auth.views import LogoutView  # 組み込みのログアウ�
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),  # ログインページ
     path('logout/', LogoutView.as_view(), name='logout'),     # ログアウトURL
-    path('home/', home, name='home'),  # ホームページ
+    path('home/', views.home_page, name='home'),  # ホームページ
 ]
