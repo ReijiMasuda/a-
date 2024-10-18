@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>ホームページへようこそ!</h1>
     <div class="dropdown">
         <button>メニュー</button>
         <div class="dropdown-content">
@@ -16,8 +15,9 @@
             <a href="{% url 'services' %}">Services</a>
             <a href="{% url 'contact' %}">Contact</a>
             <a href="{% url 'faq' %}">FAQ</a>
+            <a href="{% url 'logout' %}">ログアウト</a>
         </div>
     </div>
-    <a href="{% url 'logout' %}">ログアウト</a>
+    <h1>ホームページへようこそ!</h1>
 </body>
 </html>
