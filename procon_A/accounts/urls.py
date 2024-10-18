@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import CustomLoginView, home
 from django.contrib.auth.views import LogoutView  # 組み込みのログアウトビューをインポート
 
