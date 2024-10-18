@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
-def about(request):
-    return render(request, 'app/about.html')  # Aboutページ
+def syusseki(request):
+    return render(request, 'app/syusseki.html')  # Aboutページ
 
-def services(request):
-    return render(request, 'app/services.html')  # Servicesページ
+def students(request):
+    return render(request, 'app/students.html')  # Servicesページ
 
-def contact(request):
-    return render(request, 'app/contact.html')  # Contactページ
+def event(request):
+    return render(request, 'app/event.html')  # Contactページ
 
-def faq(request):
-    return render(request, 'app/faq.html')  # FAQページ
+def alert(request):
+    return render(request, 'app/aler.html')  # FAQページ
