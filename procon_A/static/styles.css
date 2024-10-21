@@ -1,3 +1,5 @@
+/* styles.css */
+
 /* 全体の設定 */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -27,20 +29,26 @@ a:hover {
     color: #2980b9;
 }
 
+/* ナビゲーションメニュー */
 .navbar {
     background-color: #2c3e50;
     padding: 1rem;
     display: flex;
-    justify-content: flex-start;  /* メニューを左揃え */
+    justify-content: flex-end;  /* メニューを右揃え */
     align-items: center;
 }
 
-.welcome-message {
-    color: #ffffff;  /* 文字色を白に */
-    margin-right: auto; /* 左寄せにするための余白 */
+.navbar a {
+    color: #ecf0f1;
+    padding: 0.5rem 1rem;
 }
 
-/* プルダウンメニューを左寄せ */
+.navbar a:hover {
+    background-color: #34495e;
+    border-radius: 4px;
+}
+
+/* プルダウンメニュー */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -49,8 +57,9 @@ a:hover {
 .dropdown-content {
     display: none;
     position: absolute;
-    left: 0;  /* 左端に揃える */
+    right: 0;  /* 右端に揃える */
     top: 100%;  /* ボタンの真下に配置 */
+    transform: translateX(-10%);  /* 少し右下にずらす */
     background-color: #ffffff;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
@@ -101,6 +110,7 @@ button:hover {
     justify-content: center;  /* 水平方向に中央揃え */
 }
 
+
 /* フッター */
 footer {
     background-color: #2c3e50;
@@ -110,4 +120,17 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.navbar {
+    background-color: #2c3e50;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;  /* メニューを左揃え */
+    align-items: center;
+}
+
+.welcome-message {
+    color: #ffffff;  /* 文字色を白に */
+    margin-right: auto; /* 左寄せにするための余白 */
 }
