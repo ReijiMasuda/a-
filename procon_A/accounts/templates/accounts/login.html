@@ -5,6 +5,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
