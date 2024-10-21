@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="navbar">
-        <p><big>ホームページへようこそ<big></p>
+        <p class="welcome-message"><big>ホームページへようこそ</big></p>
         <div class="dropdown">
             <button>メニュー</button>
             <div class="dropdown-content">
@@ -21,16 +21,13 @@
             </div>
         </div>
     </div>
-</body>
 
-<body>
     <h1>出席確認</h1>
     
     <div class="qr-code">
         <img src="data:image/png;base64,{{ qr_code }}" alt="QRコード">
     </div>
     
- 
     <div class="message">QRコードを読み込んでください</div>
     
     <div class="datetime">
