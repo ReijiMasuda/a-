@@ -7,18 +7,8 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
-
 <body>
     <h1>生徒からの通知</h1>
-    <div class="dropdown">
-        <button>メニュー</button>
-        <div class="dropdown-content">
-            <a href="{% url 'home' %}">ホームに戻る</a>
-            <a href="{% url 'syusseki' %}">出席状況</a>
-            <a href="{% url 'students' %}">生徒情報</a>
-            <a href="{% url 'event' %}">イベント確認</a>
-            <a href="{% url 'logout' %}">ログアウト</a>
-        </div>
-    </div>
+    <a href="{% url 'home' %}">ホームに戻る</a>
 </body>
 </html>
