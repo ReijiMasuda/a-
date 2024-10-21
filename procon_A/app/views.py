@@ -10,4 +10,4 @@ def event(request):
     return render(request, 'app/event.html')  # Contactページ
 
 def alert(request):
-    return render(request, 'app/aler.html')  # FAQページ
+    return render(request, 'app/alert.html')  # FAQページ
