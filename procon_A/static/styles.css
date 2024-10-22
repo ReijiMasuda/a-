@@ -81,6 +81,16 @@ a:hover {
     display: block;
 }
 
+/* フォーム全体を中央揃えにする */
+form {
+    width: 300px; /* フォームの幅を設定 */
+    margin: 50px auto; /* 上下50pxのマージン、左右を自動調整で中央に配置 */
+    padding: 20px;
+    border: 1px solid #ccc; /* フォームの枠線 */
+    border-radius: 8px; /* 角を少し丸める */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感 */
+}
+
 /* ボタン */
 button {
     background-color: #3498db;
