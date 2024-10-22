@@ -7,8 +7,47 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
+
+<body>
+    <div class="dropdown">
+        <button>メニュー</button>
+        <div class="dropdown-content">
+            <a href="{% url 'home' %}">ホームに戻る</a>
+            <a href="{% url 'students' %}">生徒情報</a>
+            <a href="{% url 'event' %}">イベント確認</a>
+            <a href="{% url 'alert' %}">通知</a>
+            <a href="{% url 'logout' %}">ログアウト</a>
+        </div>
+    </div>
+</body>
+
 <body>
     <h1>今日の出席状況</h1>
-    <a href="{% url 'home' %}">ホームに戻る</a>
+    <table>
+        <thead>
+            <tr>
+                <th>生徒名</th>
+                <th>出席状況</th>
+                <th>出席時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>田中 太郎</td>
+                <td>〇</td>
+                <td>2024-10-22 09:15</td>
+            </tr>
+            <tr>
+                <td>山田 花子</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>鈴木 一郎</td>
+                <td>〇</td>
+                <td>2024-10-22 09:17</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
