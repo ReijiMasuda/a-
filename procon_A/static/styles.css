@@ -135,15 +135,21 @@ footer {
     margin-right: auto; /* 左寄せにするための余白 */
 }
 
+/* テーブル全体の枠線と余白の設定 */
 table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid black;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
+    width: 80%; /* テーブルの幅を画面幅の80%に設定（必要に応じて調整） */
+    margin: 0 auto; /* テーブルを左右中央揃え */
+    border-collapse: collapse; /* セルの間のスペースをなくす */
+}
+
+/* テーブルの各セルの枠線を設定 */
+table, th, td {
+    border: 1px solid black; /* 枠線の色と太さ */
+    padding: 8px; /* セル内の余白 */
+    text-align: left; /* テキストの左寄せ */
+}
+
+/* ヘッダー部分（<th>タグ）のスタイル */
+th {
+    background-color: #f2f2f2; /* 背景色を薄いグレーに */
+}
