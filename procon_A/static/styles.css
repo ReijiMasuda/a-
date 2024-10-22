@@ -134,3 +134,16 @@ footer {
     color: #ffffff;  /* 文字色を白に */
     margin-right: auto; /* 左寄せにするための余白 */
 }
+
+table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
