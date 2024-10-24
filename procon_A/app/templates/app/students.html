@@ -3,12 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生徒情報</title>
+    <title>生徒一覧</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>生徒情報</h1>
-    <a href="{% url 'home' %}">ホームに戻る</a>
+    <h1>生徒一覧</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>生徒名</th>
+                <th>生徒ID</th>
+                <th>メールアドレス</th>
+                <th>登録日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.registration_date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">登録されている生徒はいません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<a href="add_student/"><strong>生徒を追加</strong></a>
 </body>
 </html>
+

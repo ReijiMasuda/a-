@@ -1,0 +1,20 @@
+<!-- templates/app/seitoadd.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生徒追加</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>生徒追加</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- フォームフィールドを表示 -->
+        <button type="submit">登録</button>
+    </form>
+    <a href="../">戻る</a>
+</body>
+</html>
