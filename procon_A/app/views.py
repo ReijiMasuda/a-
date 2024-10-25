@@ -25,6 +25,8 @@ def add_student(request):
         if form.is_valid():
             form.save()  # データベースに生徒情報を保存
             return redirect('student_list')  # 生徒一覧ページなどにリダイレクト
+        else:
+            form.errors.clear()
     else:
         form = StudentAddForm()
 
