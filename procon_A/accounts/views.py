@@ -6,7 +6,9 @@ import qrcode
 from io import BytesIO
 import base64
 from datetime import datetime
-# カスタムログインビュー
+from django.contrib import messages
+from django.shortcuts import render
+
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'  # ログインページのテンプレート
     authentication_form = LoginForm
@@ -15,9 +17,15 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('home')  # ログイン後のリダイレクト先
 
-# ホームページビュー（テンプレートを使う）
+    # ログイン失敗時にエラーメッセージを追加
+    def form_invalid(self, form):
+        messages.error(self.request, 'ログインに失敗しました。ユーザー名またはパスワードが間違っています。')
+        return super().form_invalid(form)
+    
+    # ホームページビュー（テンプレートを使う）
 def home(request):
     return render(request, 'accounts/home.html')  # home.html をレンダリング
+
 
 def generate_qr_code(data):
     # QRコードの生成

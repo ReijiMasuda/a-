@@ -8,6 +8,19 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
+    <h2>ログイン</h2>
+    
+    <!-- メッセージの表示 -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
