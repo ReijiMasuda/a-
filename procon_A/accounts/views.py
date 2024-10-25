@@ -19,6 +19,7 @@ class CustomLoginView(LoginView):
 
     # ログイン失敗時にエラーメッセージを追加
     def form_invalid(self, form):
+        form.errors.clear()
         messages.error(self.request, 'ログインに失敗しました。ユーザー名またはパスワードが間違っています。')
         return super().form_invalid(form)
     
