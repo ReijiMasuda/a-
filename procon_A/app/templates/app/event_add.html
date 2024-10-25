@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント追加</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <script>
+        function updateDays() {
+            const month = document.getElementById("month").value;
+            const daysSelect = document.getElementById("day");
+
+            // 選択された月に基づいて日付の選択肢を更新
+            daysSelect.innerHTML = ""; // 既存の選択肢をクリア
+
+            let daysInMonth;
+
+            if (month == 2) {
+                daysInMonth = 28; // 2月は28日
+            } else if ([4, 6, 9, 11].includes(parseInt(month))) {
+                daysInMonth = 30; // 4, 6, 9, 11月は30日
+            } else {
+                daysInMonth = 31; // それ以外の月は31日
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const option = document.createElement("option");
+                option.value = day;
+                option.textContent = day;
+                daysSelect.appendChild(option);
+            }
+        }
+    </script>
+</head>
+<body>
+	<div class="navbar">
+        <p class="welcome-message"><big>イベント確認ページ</big></p>
+        <div class="dropdown">
+            <button>メニュー</button>
+            <div class="dropdown-content">
+                <a href="{% url 'home' %}">ホームに戻る</a>
+                <a href="{% url 'syusseki' %}">出席状況</a>
+                <a href="{% url 'students' %}">生徒情報</a>
+                <a href="{% url 'alert' %}">通知</a>
+                <a href="{% url 'logout' %}"><b>ログアウト</b></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > <a href="{% url 'event' %}" style="text-decoration: underline;">イベント確認</a> > イベント追加
+    </div>
+</body>
+<body>
+
+    {% if error_message %}
+        <div style="color: red;">{{ error_message }}</div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'add_event' %}">
+        {% csrf_token %}
+
+        <div>
+            <label for="month">月:</label>
+            <select name="month" id="month" onchange="updateDays()">
+                {% for month in months_range %}
+                    <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="day">日:</label>
+            <select name="day" id="day">
+                {% for day in days_range %}
+                    <option value="{{ day }}">{{ day }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="event_time">開始時間:</label>
+            <select name="event_time" id="event_time">
+                {% for time in times %}
+                    <option value="{{ time }}">{{ time }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="event_name">イベント名:</label>
+            <input type="text" name="event_name" id="event_name" required>
+        </div>
+
+        <div>
+            <label for="event_note">備考:</label>
+            <input type="text" name="event_note" id="event_note">
+        </div>
+
+        <button type="submit">イベント追加</button>
+    </form>
+
+    <script>
+        // ページ読み込み時に日付を初期化
+        window.onload = function() {
+            updateDays();
+        }
+    </script>
+</body>
+</html>

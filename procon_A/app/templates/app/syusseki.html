@@ -18,13 +18,17 @@
                 <a href="{% url 'students' %}">生徒情報</a>
                 <a href="{% url 'event' %}">イベント確認</a>
                 <a href="{% url 'alert' %}">通知</a>
-                <a href="{% url 'logout' %}">ログアウト</a>
+                <a href="{% url 'logout' %}"><b>ログアウト</b></a>
             </div>
         </div>
     </div>
-</body>
-
-<body>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > 出席状況
+    </div>
+    
+    <p></p>
+    
     <table>
         <thead>
             <tr>
@@ -52,4 +56,5 @@
         </tbody>
     </table>
 </body>
+
 </html>

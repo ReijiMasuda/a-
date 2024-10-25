@@ -1,5 +1,5 @@
 /* styles.css */
-
+ 
 /* 全体の設定 */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -9,26 +9,26 @@ body {
     color: #333;
     text-align: center;  /* 中央揃えの基準をbodyに設定 */
 }
-
+ 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     margin-bottom: 1rem;
 }
-
+ 
 p {
     line-height: 1.6;
     margin-bottom: 1rem;
 }
-
+ 
 a {
     color: #3498db;
     text-decoration: none;
 }
-
+ 
 a:hover {
     color: #2980b9;
 }
-
+ 
 /* ナビゲーションメニュー */
 .navbar {
     background-color: #2c3e50;
@@ -37,23 +37,23 @@ a:hover {
     justify-content: flex-end;  /* メニューを右揃え */
     align-items: center;
 }
-
+ 
 .navbar a {
     color: #ecf0f1;
     padding: 0.5rem 1rem;
 }
-
+ 
 .navbar a:hover {
     background-color: #34495e;
     border-radius: 4px;
 }
-
+ 
 /* プルダウンメニュー */
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
+ 
 .dropdown-content {
     display: none;
     position: absolute;
@@ -66,21 +66,21 @@ a:hover {
     z-index: 1;
     border-radius: 4px;
 }
-
+ 
 .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     display: block;
 }
-
+ 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
-
+ 
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
+ 
 /* フォームを中央揃えにする */
 form {
     width: 300px; /* フォームの幅を設定 */
@@ -90,7 +90,7 @@ form {
     border-radius: 8px; /* 角を少し丸める */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感 */
 }
-
+ 
 /* ボタン */
 button {
     background-color: #3498db;
@@ -102,25 +102,25 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+ 
 button:hover {
     background-color: #2980b9;
 }
-
+ 
 /* コンテナ */
 .container {
     max-width: 960px;
     margin: 0 auto;
     padding: 2rem;
 }
-
+ 
 .qr-code {
     margin: 2rem auto;  /* 上下に余白を取り、中央に配置 */
     display: flex;
     justify-content: center;  /* 水平方向に中央揃え */
 }
-
-
+ 
+ 
 /* フッター */
 footer {
     background-color: #2c3e50;
@@ -131,7 +131,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
+ 
 .navbar {
     background-color: #2c3e50;
     padding: 1rem;
@@ -139,7 +139,7 @@ footer {
     justify-content: flex-start;  /* メニューを左揃え */
     align-items: center;
 }
-
+ 
 .welcome-message {
     color: #ffffff;  /* 文字色を白に */
     margin-right: auto; /* 左寄せにするための余白 */

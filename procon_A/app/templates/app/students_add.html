@@ -22,6 +22,14 @@
             </div>
         </div>
     </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> >
+        <a href="{% url 'students' %}" style="text-decoration: underline;">生徒情報</a> > 生徒追加
+    </div>
+    
+    <p></p>
+    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}  <!-- フォームフィールドを表示 -->

@@ -17,10 +17,16 @@
                 <a href="{% url 'students' %}">生徒情報</a>
                 <a href="{% url 'event' %}">イベント確認</a>
                 <a href="{% url 'alert' %}">通知</a>
-                <a href="{% url 'logout' %}">ログアウト</a>
+                <a href="{% url 'logout' %}"><b>ログアウト</b></a>
             </div>
         </div>
     </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        ホーム
+    </div>
+    
+    <p></p>
     
     <div class="qr-code">
         <img src="data:image/png;base64,{{ qr_code }}" alt="QRコード">

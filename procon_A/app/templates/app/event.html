@@ -3,12 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イベント</title>
+    <title>イベント一覧</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>イベント確認ページ</h1>
-    <a href="{% url 'home' %}">ホームに戻る</a>
+    <div class="navbar">
+        <p class="welcome-message"><big>イベント確認ページ</big></p>
+        <div class="dropdown">
+            <button>メニュー</button>
+            <div class="dropdown-content">
+                <a href="{% url 'home' %}">ホームに戻る</a>
+                <a href="{% url 'syusseki' %}">出席状況</a>
+                <a href="{% url 'students' %}">生徒情報</a>
+                <a href="{% url 'alert' %}">通知</a>
+                <a href="{% url 'logout' %}"><b>ログアウト</b></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > イベント確認
+    </div>
+</body>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>イベント名</th>
+                <th>備考</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.event_note }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">イベントはありません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'add_event' %}">新しいイベントを追加</a>
 </body>
 </html>
