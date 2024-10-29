@@ -166,3 +166,20 @@ footer {
 
 /* その他のスタイルはすでに設定されていると仮定します */
 
+.event_table {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    margin: 2rem 0; /* 上下の余白を追加 */
+}
+
+table {
+    width: 80%; /* テーブル幅を指定して、中央揃えを際立たせる */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px 10px; /* 各セルに余白を追加して見やすく */
+    border: 1px solid #ddd; /* ボーダーを追加して区切りを明確に */
+    text-align: center; /* テキストも中央揃え */
+}
+
