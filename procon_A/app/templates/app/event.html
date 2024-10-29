@@ -44,7 +44,7 @@
                 <td>
                     <form method="post" action="{% url 'delete_event' event.id %}" style="display: inline;">
                         {% csrf_token %}
-                        <a href="{% url 'delete_event' event_id=event.id %}">削除</a>
+                        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
                     </form>
                 </td>
             </tr>
