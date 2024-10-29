@@ -9,4 +9,5 @@ urlpatterns = [
     path('alert/', alert, name='alert'),                  # FAQページ
     path('students/add_student/', views.add_student, name='add_student'),
     path('event/add/', views.add_event, name='add_event'),  # イベント追加
+    path('event/<int:event_id>/delete/', views.delete_event, name='delete_event'),  # イベント削除
 ]
