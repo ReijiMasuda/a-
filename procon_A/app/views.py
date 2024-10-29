@@ -5,6 +5,9 @@ from .models import Student
 from .models import Event
 import datetime
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def syusseki(request):
     return render(request, 'app/syusseki.html')  # Aboutページ
@@ -94,3 +97,10 @@ def event_list(request):
         'events': events
     }
     return render(request, 'app/event.html', context)
+
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.method == 'POST':
+        event.delete()
+        return redirect('event_list')  # イベント一覧ページへリダイレクト
+    return HttpResponseRedirect(reverse('event_list'))

@@ -26,16 +26,13 @@
         <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > イベント確認
     </div>
     
-    <p></p>
-    
-</body>
-<body>
     <table>
         <thead>
             <tr>
                 <th>日付</th>
                 <th>イベント名</th>
                 <th>備考</th>
+                <th>操作</th> <!-- 操作列追加 -->
             </tr>
         </thead>
         <tbody>
@@ -44,10 +41,16 @@
                 <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
                 <td>{{ event.event_name }}</td>
                 <td>{{ event.event_note }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_event' event.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+                    </form>
+                </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="3">イベントはありません。</td>
+                <td colspan="4">イベントはありません。</td>
             </tr>
             {% endfor %}
         </tbody>
