@@ -102,5 +102,4 @@ def delete_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if request.method == 'POST':
         event.delete()
-        return redirect('event_list')  # イベント一覧ページへリダイレクト
-    return HttpResponseRedirect(reverse('event_list'))
+        return redirect('event')  # イベント一覧ページへリダイレクト
