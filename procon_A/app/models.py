@@ -11,7 +11,6 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
-
 class Event(models.Model):
     event_date = models.DateTimeField()  # 日付と開始時間を保存
     event_name = models.CharField(max_length=200)  # イベント名
@@ -19,4 +18,3 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event_name
-

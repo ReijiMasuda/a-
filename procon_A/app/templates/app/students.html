@@ -44,7 +44,7 @@
                 <td>{{ student.name }}</td>
                 <td>{{ student.student_id }}</td>
                 <td>{{ student.email }}</td>
-                <td>{{ student.registration_date }}</td>
+                <td>{{ student.registration_date|date:"Y年n月j日 H:i" }}</td>
             </tr>
             {% empty %}
             <tr>
