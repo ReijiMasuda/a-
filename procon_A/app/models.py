@@ -1,6 +1,11 @@
 # models.py
 from django.db import models
 
+class Attendance(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    attendance_time = models.DateTimeField()
+
+
 class Student(models.Model):
     name = models.CharField(max_length=100)
     student_id = models.CharField(max_length=10, unique=True)

@@ -9,8 +9,39 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from django.contrib.auth import authenticate, login
+from django.utils import timezone
+from .models import Student, Attendance  # Attendanceモデルを追加
+from django.shortcuts import render, redirect
+from app.models import Student  # 必要に応じてアプリ名を置き換え
+
+def student_login(request):
+    # Studentモデルの利用例
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        try:
+            student = Student.objects.get(email=email, password=password)
+            # ログイン処理
+            return redirect('attendance_page')  # 適切なURLにリダイレクト
+        except Student.DoesNotExist:
+            # エラーハンドリング
+            pass
+
+    return render(request, 'student_login.html')
+
+
+def student_attendance(request):
+    if request.method == 'POST':
+        student = request.user
+        Attendance.objects.create(student=student, attendance_time=timezone.now())  # 出席情報を保存
+        messages.success(request, '出席が完了しました。')
+    
+    return render(request, 'app/student_attendance.html')
+
 def syusseki(request):
-    return render(request, 'app/syusseki.html')  # Aboutページ
+    attendances = Attendance.objects.select_related('student').all()
+    return render(request, 'app/syusseki.html', {'attendances': attendances})
 
 def students(request):
     return render(request, 'app/students.html')  # Servicesページ
