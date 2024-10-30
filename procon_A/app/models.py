@@ -2,9 +2,9 @@
 from django.db import models
 
 class Attendance(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    attendance_time = models.DateTimeField()
-
+    # 'app.Student'を文字列で指定することで循環インポートを回避
+    student = models.ForeignKey('app.Student', on_delete=models.CASCADE)  # 'app' は実際のアプリ名に変更
+    attendance_time = models.DateTimeField(auto_now_add=True)
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
