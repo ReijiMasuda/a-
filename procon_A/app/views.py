@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from .forms import StudentAddForm
 from .models import Student
@@ -8,9 +7,7 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
 from django.contrib.auth import authenticate, login
-from django.utils import timezone
 from .models import Student, Attendance  # Attendanceモデルを追加
 from django.shortcuts import render, redirect
 from app.models import Student  # 必要に応じてアプリ名を置き換え
