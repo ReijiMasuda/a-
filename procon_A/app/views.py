@@ -8,34 +8,36 @@ from .forms import StudentAddForm
 from .models import Student, Attendance, Event
 from django.contrib.auth.decorators import login_required
 
+
 def student_login(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
         try:
-            student = Student.objects.get(email=email, password=password)
-            login(request, student)  # ログイン処理
+            student = Student.objects.get(email=email)
+            if student.password == password:  # パスワードを直接比較
+                request.session['student_id'] = student.id  # student_idをセッションに保存
 
-            # 出席情報を保存
-            Attendance.objects.create(student=student, attendance_time=timezone.now())
+                # 出席情報を保存（必要であれば）
+                Attendance.objects.create(student=student, attendance_time=timezone.now())
 
-            return redirect('attendance_complete')  # 出席完了ページにリダイレクト
+                return redirect('student_attendance')  # 出席登録ページにリダイレクト
+            else:
+                messages.error(request, "ログイン情報が正しくありません。")
         except Student.DoesNotExist:
             messages.error(request, "ログイン情報が正しくありません。")
 
     return render(request, 'app/student_login.html')
 
-def attendance_complete(request):
-    return render(request, 'app/attendance_complete.html')  # 出席完了ページ
+
 
 def student_attendance(request):
-    # セッションから student_id を取得
     student_id = request.session.get('student_id')
     if not student_id:
         return redirect('student_login')  # 生徒が未ログインならログインページにリダイレクト
 
     # 生徒情報の取得
-    student = Student.objects.get(id=student_id)
+    student = get_object_or_404(Student, id=student_id)
 
     if request.method == 'POST':
         # 出席情報を登録
@@ -43,7 +45,7 @@ def student_attendance(request):
         messages.success(request, '出席が完了しました。')
         return redirect('syusseki')  # 出席情報一覧ページにリダイレクト
 
-    return render(request, 'app/student_attendance.html')
+    return render(request, 'app/attendance_complete.html')
 
 def syusseki(request):
     # 出席データを取得して表示
