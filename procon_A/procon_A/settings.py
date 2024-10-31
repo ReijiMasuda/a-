@@ -26,9 +26,8 @@ SECRET_KEY = 'django-insecure-!!wb@__nb#&7zm6^e149)*na4+c%r-r=s4#5q3_%7&t$=px9nf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mreiji0403.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'app.Student'
 
 # Application definition
 
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'procon_A.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'app', 'templates')],
+        'DIRS': [BASE_DIR / 'templates'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
