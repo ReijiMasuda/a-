@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from datetime import datetime
 from .models import AttendanceRecord 
+from app.models import Event
 
 def students_event(request):
     return render(request, 'app/students_event.html')
@@ -93,3 +94,7 @@ def calculate_attendance_stats(records):
         'early_leave_days': early_leave_days,
         'attendance_rate': round(attendance_rate, 2)
     }
+
+def student_event_list(request):
+    events = Event.objects.all()  # すべてのイベントを取得
+    return render(request, 'app/students_event.html', {'events': events})

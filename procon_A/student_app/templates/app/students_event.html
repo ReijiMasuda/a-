@@ -20,28 +20,30 @@
     
 </body>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>日付</th>
-                <th>イベント名</th>
-                <th>備考</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in events %}
-            <tr>
-                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
-                <td>{{ event.event_name }}</td>
-                <td>{{ event.event_note }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">開催予定のイベントはありません。</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="event_table">
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>日付</th>
+	                <th>イベント名</th>
+	                <th>備考</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            {% for event in events %}
+	            <tr>
+	                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
+	                <td>{{ event.event_name }}</td>
+	                <td>{{ event.event_note }}</td>
+	            </tr>
+	            {% empty %}
+	            <tr>
+	                <td colspan="4">イベントはありません。</td>
+	            </tr>
+	            {% endfor %}
+	        </tbody>
+    	</table>
+	</div>
 
 </body>
 </html>
