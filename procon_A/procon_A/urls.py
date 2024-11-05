@@ -24,5 +24,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', CustomLoginView.as_view(), name='login'),  # 最初のページとしてログインページを表示
     path('app/', include('app.urls')), 
+    path('studentapp/', include('student_app.urls', namespace='student_app')),  # 生徒用URL
 ]
 

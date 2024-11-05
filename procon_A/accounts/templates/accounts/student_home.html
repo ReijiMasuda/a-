@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホームページ</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="mobile-only">
+    <div class="navbar">
+        <p class="welcome-message"><big>生徒用トップページ</big></p>
+    </div>
+
+    <div class="button-group">
+        <a href="{% url 'student_app:students_event' %}" class="btn btn-primary btn-block my-2">イベント</a>
+        <a href="{% url 'student_app:students_calendar' %}" class="btn btn-secondary btn-block my-2">出席状況を確認する</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger btn-block my-2">ログアウト</a>
+        <a href="{% url 'student_app:students_report' %}">遅刻欠席届け（確認用）</a></br>
+        <a href="{% url 'student_app:students_admin_return' %}">管理者からの返却（確認用）</a></br>
+        <a href="{% url 'student_app:students_eventalert' %}">イベント削除通知（確認用）</a></br>
+    </div>    
+
+</body>
+</html>

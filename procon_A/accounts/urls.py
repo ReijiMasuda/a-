@@ -7,4 +7,5 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),  # ログインページ
     path('logout/', LogoutView.as_view(), name='logout'),     # ログアウトURL
     path('home/', views.home_page, name='home'),  # ホームページ
+    path('studenthome/', views.student_home, name='student_home'),  # 生徒用ホームページ
 ]

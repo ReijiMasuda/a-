@@ -27,6 +27,9 @@ class CustomLoginView(LoginView):
 def home(request):
     return render(request, 'accounts/home.html')  # home.html をレンダリング
 
+# 生徒用ホームページビュー
+def student_home(request):
+    return render(request, 'accounts/student_home.html')  # student_home.html をレンダリング
 
 def generate_qr_code(data):
     # QRコードの生成

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返却ページ</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar"> 
+        <div class="navbar text-white p-3">
+            <p class="welcome-message h4">管理者からの返却</p>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>日付</td>
+                    <td>2024年10月31日(木)</td>
+                </tr>
+                <tr>
+                    <td>状況報告 <span id="status-error" class="text-danger"></span></td>
+                    <td>
+                        遅刻
+                    </td>
+                </tr>
+                <tr>
+                    <td>時間 <span id="time-error" class="text-danger"></span></td>
+                    <td>
+                        12時45分
+                    </td>
+                </tr>   
+                <tr>
+                    <td>理由 <span id="reason-error" class="text-danger"></span></td>
+                    <td>
+                        test
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 全体のエラーメッセージ表示エリア -->
+    <div class="container mt-2">
+        <div id="error-message" class="alert alert-danger" style="display: none;">すべての項目を入力してください。</div>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="text-right">
+        <a href="{% url 'student_app:students_calendar' %}" class="btn btn-primary">
+            確認しました
+        </a>
+    </div>
+    
+    
+</body>
+</html>

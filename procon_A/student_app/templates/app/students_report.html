@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欠席・遅刻・早退届け</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar"> 
+        <div class="navbar text-white p-3">
+            <p class="welcome-message h4">欠席・遅刻・早退届け</p>
+        </div>
+    </div>
+
+    <div class="ml-3 mt-2">
+        <a href="{% url 'student_home' %}">ホーム</a> > <a href="{% url 'student_app:students_calendar' %}">出席状況</a> > 欠席・遅刻・早退届け
+    </div>
+
+    <div class="container mt-4">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>日付</td>
+                    <td>2024年10月31日(木)</td>
+                </tr>
+                <tr>
+                    <td>状況報告 <span id="status-error" class="text-danger"></span></td>
+                    <td>
+                        <select class="form-control" id="status" onchange="toggleTimeFields()">
+                            <option value="">選択してください</option>
+                            <option value="欠席">欠席</option>
+                            <option value="遅刻">遅刻</option>
+                            <option value="早退">早退</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>時間 <span id="time-error" class="text-danger"></span></td>
+                    <td>
+                        <select class="form-control" name="hours" id="hours">
+                            <option value="">選択してください</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select> 時
+                        <select class="form-control" name="minutes" id="minutes" style="margin-left: 10px;">
+                            <option value="">選択してください</option>
+                            <option value="0">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select> 分
+                    </td>
+                </tr>   
+                <tr>
+                    <td>理由 <span id="reason-error" class="text-danger"></span></td>
+                    <td>
+                        <input type="text" class="form-control" id="reason" placeholder="理由を入力してください" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 全体のエラーメッセージ表示エリア -->
+    <div class="container mt-2">
+        <div id="error-message" class="alert alert-danger" style="display: none;">すべての項目を入力してください。</div>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="text-right">
+        <button class="btn btn-primary" onclick="validateForm()">送信する</button>
+    </div>
+
+    <script>
+        // 「状況報告」の選択に応じて時間フィールドの有効/無効を切り替え
+        function toggleTimeFields() {
+            const status = document.getElementById("status").value;
+            const hoursField = document.getElementById("hours");
+            const minutesField = document.getElementById("minutes");
+
+            if (status === "欠席") {
+                hoursField.disabled = true;
+                minutesField.disabled = true;
+                hoursField.value = "";
+                minutesField.value = "";
+            } else {
+                hoursField.disabled = false;
+                minutesField.disabled = false;
+            }
+        }
+
+        function validateForm() {
+            // 各エラー表示エリアの初期化
+            document.getElementById("error-message").style.display = "none";
+            document.getElementById("status-error").innerText = "";
+            document.getElementById("time-error").innerText = "";
+            document.getElementById("reason-error").innerText = "";
+
+            // 各項目の値を取得
+            const status = document.getElementById("status").value;
+            const hours = document.getElementById("hours").value;
+            const minutes = document.getElementById("minutes").value;
+            const reason = document.getElementById("reason").value;
+
+            let isValid = true;
+
+            // 各項目の未入力チェックとエラーメッセージの表示
+            if (!status) {
+                document.getElementById("status-error").innerText = " * 必須";
+                isValid = false;
+            }
+            if (!hours && !minutes && status !== "欠席") {
+                document.getElementById("time-error").innerText = " * 必須";
+                isValid = false;
+            }
+            if (!reason) {
+                document.getElementById("reason-error").innerText = " * 必須";
+                isValid = false;
+            }
+
+            // 未入力がある場合のメッセージ表示
+            if (!isValid) {
+                document.getElementById("error-message").style.display = "block";
+                return;
+            }
+
+            // 入力がすべて完了している場合、送信処理を実行
+            window.location.href = "{% url 'student_app:students_reportcomplete' %}";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント通知</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > イベント通知
+    </div>
+    
+    <p></p>
+    
+</body>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>イベント名</th>
+                <th>備考</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.event_note }}</td>
+            </tr>
+            <th>このイベントは削除されました</th>
+            <button href="{% url 'student_home' %}">確認しました</button>
+            {% empty %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

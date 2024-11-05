@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欠席・遅刻・早退届け</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar"> 
+        <div class="navbar text-white p-3">
+            <p class="welcome-message h4">欠席・遅刻・早退届け</p>
+        </div>
+    </div>
+
+    <div class="ml-3 mt-2">
+        <a href="{% url 'student_home' %}">ホーム</a> > <a href="{% url 'student_app:students_calendar' %}">出席状況</a> > <a href="{% url 'student_app:students_report' %}">欠席・遅刻・早退届け</a> > 送信完了
+    </div>
+
+    <!-- 通知メッセージ -->
+    <div class="container mt-5 text-center">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">送信が完了しました</h4>
+            <p>管理者が確認するまでしばらくお待ちください。</p>
+        </div>
+    </div>
+</body>
+</html>

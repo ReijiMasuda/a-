@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出席状況</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar"> 
+    <div class="navbar text-white p-3">
+        <p class="welcome-message h4">出席状況</p>
+    </div>
+    </div>
+
+    <div class="ml-3 mt-2">
+        <a href="{% url 'student_home' %}">ホーム</a> > 出席状況
+    </div>
+
+    <div class="container mt-4">
+        <!-- カレンダー表示 -->
+        <div class="calendar-container mb-4">
+            <h5>出席カレンダー</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>月</th>
+                        <th>火</th>
+                        <th>水</th>
+                        <th>木</th>
+                        <th>金</th>
+                        <th>土</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week in calendar %}
+                    <tr>
+                        {% for day in week %}
+                        <td class="{% if day.is_past %} past {% endif %} 
+                                   {% if day.is_attended %} attended {% elif day.is_absent %} absent {% elif day.is_late %} late {% endif %}">
+                            {% if day.is_future %}
+                                <a href="{% url 'late_early_notification' %}" class="text-dark">{{ day.day }}</a>
+                            {% else %}
+                                {{ day.day }}
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+          <!-- 出席状況表 -->
+    <div class="attendance-table-container">
+        <h5>出席状況統計</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>出席数</th>
+                    <th>欠席数</th>
+                    <th>遅刻数</th>
+                    <th>早退数</th>
+                    <th>出席率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 月間データ -->
+                <tr>
+                    <td>月間</td>
+                    <td>{{ monthly_stats.attended_days }}</td>
+                    <td>{{ monthly_stats.absent_days }}</td>
+                    <td>{{ monthly_stats.late_days }}</td>
+                    <td>{{ monthly_stats.early_leave_days }}</td>
+                    <td>{{ monthly_stats.attendance_rate }}%</td>
+                </tr>
+                <!-- 年間データ -->
+                <tr>
+                    <td>年間</td>
+                    <td>{{ yearly_stats.attended_days }}</td>
+                    <td>{{ yearly_stats.absent_days }}</td>
+                    <td>{{ yearly_stats.late_days }}</td>
+                    <td>{{ yearly_stats.early_leave_days }}</td>
+                    <td>{{ yearly_stats.attendance_rate }}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

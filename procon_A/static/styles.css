@@ -186,3 +186,36 @@ th, td {
     text-align: center; /* テキストも中央揃え */
 }
 
+
+/* 以下生徒用（スマホ用の画面）スタイル調整 */
+
+/* ボタンのスタイル調整 */
+.button-group .btn {
+    font-size: 1.2rem; /* ボタンのフォントサイズ */
+    padding: 0.75rem 1.25rem; /* 内側の余白を広げる */
+    border-radius: 8px; /* ボタンの角を少し丸くする */
+    margin-bottom: 0.5rem; /* ボタン間の余白 */
+}
+
+/* スマホ専用のスタイル */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* スマホ表示時に左寄せ */
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column; /* ボタンを縦並びにする */
+        width: 100%; /* 横幅いっぱいに表示 */
+    }
+
+    .button-group .btn {
+        width: 100%; /* ボタンを横幅いっぱいに */
+    }
+}

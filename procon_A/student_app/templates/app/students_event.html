@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今後の開催イベント</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <p class="welcome-message"><big>今後の開催イベント</big></p>
+    </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'student_home' %}" style="text-decoration: underline;">ホーム</a> > 今後の開催イベント
+    </div>
+    
+    <p></p>
+    
+</body>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>イベント名</th>
+                <th>備考</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.event_note }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">開催予定のイベントはありません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
