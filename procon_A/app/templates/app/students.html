@@ -27,7 +27,7 @@
     </div>
     
     
-    <p></p>
+    <p>
 
     <table border="1">
         <thead>
@@ -44,7 +44,7 @@
                 <td>{{ student.name }}</td>
                 <td>{{ student.student_id }}</td>
                 <td>{{ student.email }}</td>
-                <td>{{ student.registration_date }}</td>
+                <td>{{ student.registration_date|date:"Y年n月j日 H:i" }}</td>
             </tr>
             {% empty %}
             <tr>
@@ -54,6 +54,7 @@
         </tbody>
     </table>
 </body>
-<input type="button" onclick="location.href='add_student/'" value="追加">
+<p>
+<a href="{% url 'add_student' %}">生徒追加</a>
 </html>
 

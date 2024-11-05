@@ -27,33 +27,18 @@
         <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > 出席状況
     </div>
     
-    <p></p>
+    <p>
     
     <table>
-        <thead>
-            <tr>
-                <th>生徒名</th>
-                <th>出席状況</th>
-                <th>出席時間</th>
-            </tr>
-        </thead>
         <tbody>
-            <tr>
-                <td>田中 太郎</td>
-                <td>〇</td>
-                <td>2024-10-22 09:15</td>
-            </tr>
-            <tr>
-                <td>山田 花子</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>鈴木 一郎</td>
-                <td>〇</td>
-                <td>2024-10-22 09:17</td>
-            </tr>
-        </tbody>
+    		{% for attendance in attendances %}
+    	<tr>
+        	<td>{{ attendance.student.name }}</td>
+        	<td>〇</td>
+        	<td>{{ attendance.attendance_time|date:"Y年m月d日 H:i" }}</td>
+    	</tr>
+    		{% endfor %}
+		</tbody>
     </table>
 </body>
 

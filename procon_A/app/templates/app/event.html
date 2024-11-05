@@ -26,32 +26,39 @@
         <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > イベント確認
     </div>
     
-    <p></p>
+    <p>
     
-</body>
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>日付</th>
-                <th>イベント名</th>
-                <th>備考</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in events %}
-            <tr>
-                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
-                <td>{{ event.event_name }}</td>
-                <td>{{ event.event_note }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">イベントはありません。</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="event_table">
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>日付</th>
+	                <th>イベント名</th>
+	                <th>備考</th>
+	                <th>管理</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            {% for event in events %}
+	            <tr>
+	                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
+	                <td>{{ event.event_name }}</td>
+	                <td>{{ event.event_note }}</td>
+	                <td>
+	                    <form method="post" action="{% url 'delete_event' event.id %}" style="display: inline;">
+	                        {% csrf_token %}
+	                        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+	                    </form>
+	                </td>
+	            </tr>
+	            {% empty %}
+	            <tr>
+	                <td colspan="4">イベントはありません。</td>
+	            </tr>
+	            {% endfor %}
+	        </tbody>
+    	</table>
+	</div>
 
     <a href="{% url 'add_event' %}">新しいイベントを追加</a>
 </body>

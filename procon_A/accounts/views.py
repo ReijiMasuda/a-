@@ -19,6 +19,7 @@ class CustomLoginView(LoginView):
 
     # ログイン失敗時にエラーメッセージを追加
     def form_invalid(self, form):
+        form.errors.clear()
         messages.error(self.request, 'ログインに失敗しました。ユーザー名またはパスワードが間違っています。')
         return super().form_invalid(form)
     
@@ -47,9 +48,22 @@ def generate_qr_code(data):
     # バイナリデータをbase64エンコード
     img_str = base64.b64encode(buffer.getvalue()).decode('utf-8')
     return img_str
- 
+
+#
+# def home_page(request):
+#     qr_data = "https://example.com/attendance"  # QRコードに含めるデータ
+#     qr_code = generate_qr_code(qr_data)
+#
+#     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#
+#     context = {
+#         'qr_code': qr_code,
+#         'current_time': current_time
+#     }
+#     return render(request, 'accounts/home.html', context)
+
 def home_page(request):
-    qr_data = "https://example.com/attendance"  # QRコードに含めるデータ
+    qr_data = request.build_absolute_uri(reverse_lazy('student_login'))  # 生徒ログイン用URLをQRコードに設定
     qr_code = generate_qr_code(qr_data)
     
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')

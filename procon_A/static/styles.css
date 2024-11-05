@@ -165,3 +165,24 @@ footer {
 }
 
 /* その他のスタイルはすでに設定されていると仮定します */
+
+.event_table {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto; /* 上下の余白と左右中央寄せ */
+    width: 100%; /* 親要素の幅に合わせる */
+}
+
+table {
+    max-width: 80%; /* テーブルの最大幅 */
+    width: 100%; /* 親要素に収まるように設定 */
+    border-collapse: collapse;
+    margin: 0 auto; /* テーブル自体を中央に配置 */
+}
+
+th, td {
+    padding: 15px 10px; /* 各セルに余白を追加して見やすく */
+    border: 1px solid #ddd; /* ボーダーを追加して区切りを明確に */
+    text-align: center; /* テキストも中央揃え */
+}
+
