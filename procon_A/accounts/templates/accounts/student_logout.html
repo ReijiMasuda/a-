@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生徒ログアウト</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="mobile-only">
+    <div class="navbar">
+        <p class="welcome-message"><big>ログアウト</big></p>
+    </div> 
+
+    <!-- ログアウト確認メッセージとボタン -->
+    <div class="container text-center mt-5">
+        <h3>本当にログアウトしてもよろしいですか？</h3>
+        <div class="mt-4">
+            <!-- ログアウト用のリンク。URL部分は実際のログアウトURLに置き換えてください -->
+            <a href="{% url 'logout' %}" class="btn btn-danger">はい</a>
+            <!-- 元のページに戻るリンク -->
+            <a href="javascript:history.back()" class="btn btn-secondary">いいえ</a>
+        </div>
+    </div>
+</body>
+</html>

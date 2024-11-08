@@ -31,6 +31,10 @@ def home(request):
 def student_home(request):
     return render(request, 'accounts/student_home.html')  # student_home.html をレンダリング
 
+def student_logout_confirm(request):
+    # 確認ページを表示するためのビュー
+    return render(request, 'accounts/student_logout.html')
+
 def generate_qr_code(data):
     # QRコードの生成
     qr = qrcode.QRCode(
