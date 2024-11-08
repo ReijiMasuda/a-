@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イベント通知</title>
+    <title>イベント削除通知ページ</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
-        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > イベント通知
+    <!-- ナビゲーションバー -->
+    <div class="navbar bg-primary text-white p-3">
+        <p class="welcome-message h4">イベント取り消しのお知らせ</p>
     </div>
-    
-    <p></p>
-    
-</body>
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>日付</th>
-                <th>イベント名</th>
-                <th>備考</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in events %}
-            <tr>
-                <td>{{ event.event_date|date:"Y年n月j日 H:i" }}</td>
-                <td>{{ event.event_name }}</td>
-                <td>{{ event.event_note }}</td>
-            </tr>
-            <th>このイベントは削除されました</th>
-            <button href="{% url 'student_home' %}">確認しました</button>
-            {% empty %}
-            {% endfor %}
-        </tbody>
-    </table>
 
+    <!-- メインコンテンツ -->
+    <div class="container mt-4">
+        <h2 class="text-center">このイベントは削除されました。</h2>
+        <table class="table table-bordered mt-4">
+            <tbody>
+                <tr>
+                    <td>日付</td>
+                    <td>2024年11月08日(金)</td>
+                </tr>
+                <tr>
+                    <td>時間</td>
+                    <td>09時15分</td>
+                </tr>
+                <tr>
+                    <td>イベント名</td>
+                    <td>test</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- エラーメッセージ表示エリア -->
+    <div class="container mt-2">
+        <div id="error-message" class="alert alert-danger" style="display: none;">
+            すべての項目を入力してください。
+        </div>
+    </div>
+
+    <!-- 確認ボタン -->
+    <div class="container text-right mt-4">
+        <a href="{% url 'student_app:students_event' %}" class="btn btn-primary">
+            確認しました
+        </a>
+    </div>
 </body>
 </html>
