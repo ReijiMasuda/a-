@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from datetime import datetime
-from .models import AttendanceRecord 
+from .models import AttendanceRecord
 from app.models import Event
 
 def students_event(request):
@@ -72,9 +72,20 @@ def attendance_view(request):
     )
     yearly_stats = calculate_attendance_stats(yearly_records)
 
+    # カレンダーイベントデータを作成
+    calendar_data = [
+        {
+            'title': '出席' if record.status == 'attended' else '欠席' if record.status == 'absent' else '遅刻' if record.status == 'late' else '早退',
+            'start': record.date.strftime('%Y-%m-%d'),
+            'color': 'green' if record.status == 'attended' else 'red' if record.status == 'absent' else 'orange'
+        }
+        for record in yearly_records
+    ]
+
     context = {
         'monthly_stats': monthly_stats,
-        'yearly_stats': yearly_stats
+        'yearly_stats': yearly_stats,
+        'calendar_data': calendar_data,  # カレンダーデータを追加
     }
     return render(request, 'attendance/attendance.html', context)
 
