@@ -40,25 +40,29 @@
                 <tr>
                     <td>時間 <span id="time-error" class="text-danger"></span></td>
                     <td>
-                        <select class="form-control" name="hours" id="hours">
-                            <option value="">選択してください</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                        </select> 時
-                        <select class="form-control" name="minutes" id="minutes" style="margin-left: 10px;">
-                            <option value="">選択してください</option>
-                            <option value="0">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select> 分
+                        <div class="d-flex align-items-center">
+                            <select class="form-control small-select" name="hours" id="hours">
+                                <option value="">選択してください</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                            <span class="ml-2 mr-2">時</span>
+                            <select class="form-control small-select" name="minutes" id="minutes">
+                                <option value="">選択してください</option>
+                                <option value="0">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                            </select>
+                            <span class="ml-2">分</span>
+                        </div>
                     </td>
-                </tr>   
+                </tr>
                 <tr>
                     <td>理由 <span id="reason-error" class="text-danger"></span></td>
                     <td>

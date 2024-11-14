@@ -197,6 +197,11 @@ th, td {
     margin-bottom: 0.5rem; /* ボタン間の余白 */
 }
 
+.small-select {
+    width: 80px; /* 選択肢の幅を狭めます */
+    display: inline-block;
+}
+
 /* スマホ専用のスタイル */
 @media only screen and (max-width: 768px) {
     body {
