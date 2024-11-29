@@ -3,54 +3,46 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 from .models import AttendanceRecord
 from app.models import Event
+from student_app.models import DeletedEvent
+from django.urls import reverse
 
-def students_event(request):
-    return render(request, 'app/students_event.html')
-
-def students_eventalert(request):
-    return render(request, 'app/students_eventalert.html')
-"""
-# 生徒側への通知ページ
-@login_required
-def students_eventalert(request):
-
-    # 管理者によるイベント削除の通知を取得
-    notifications = EventDeletionNotification.objects.filter(student=request.user, seen=False)
+def student_event_list(request):
+    # 削除されたイベントを取得(11/29 イベント取り消しのページはデータベースを作ってからやる)
+    deleted_event = DeletedEvent.objects.last()
+    if deleted_event:
+        # 削除通知ページにリダイレクト
+        return redirect('app/students_eventalert.html')
     
-    # 通知がある場合のみ通知ページを表示
-    if notifications.exists():
-        context = {'notifications': notifications}
-        # 通知を表示済みに変更
-        notifications.update(seen=True)
-        return render(request, 'students/eventalert.html', context)
-    else:
-        return redirect('home')  # 通知がない場合はホームにリダイレクト
-"""
+        # 通常のイベントリストを表示
+    events = Event.objects.all()
+    return render(request, 'app/students_event.html', {'events': events})
+
+def students_eventalert(request):
+    deleted_event = DeletedEvent.objects.last()
+    return render(request, 'app/students_eventalert.html', {
+        'deleted_event': deleted_event})
 
 def students_calendar(request):
     return render(request, 'app/students_calendar.html')
 
 def students_report(request):
-    return render(request, 'app/students_report.html')
+    # クエリパラメータ 'date' を取得
+    date_str = request.GET.get('date')
+    
+    # 文字列を datetime オブジェクトに変換
+    date = datetime.strptime(date_str, '%Y-%m-%d') if date_str else None
+
+    context = {
+        'date': date,  # datetime オブジェクトをテンプレートに渡す
+    }
+    return render(request, 'app/students_report.html', context)
+
 
 def students_reportcomplete(request):
     return render(request, 'app/students_reportcomplete.html')
 
 def students_admin_return(request):
     return render(request, 'app/students_admin_return.html')
-"""
-@login_required
-def students_admin_return(request):
-    # データが返却されたかどうかを確認
-    data_returned = check_data_return_status()  # 管理者からの返却状況をチェックする関数
-    
-    if data_returned:
-        # データが返却された場合のみ表示
-        return render(request, 'students/admin_return.html')
-    else:
-        # 返却されていない場合はエラーページや別ページにリダイレクト
-        return render(request, 'students/no_return.html')
-"""
 
 # カレンダー機能
 def attendance_view(request):
@@ -77,7 +69,8 @@ def attendance_view(request):
         {
             'title': '出席' if record.status == 'attended' else '欠席' if record.status == 'absent' else '遅刻' if record.status == 'late' else '早退',
             'start': record.date.strftime('%Y-%m-%d'),
-            'color': 'green' if record.status == 'attended' else 'red' if record.status == 'absent' else 'orange'
+            'color': 'green' if record.status == 'attended' else 'red' if record.status == 'absent' else 'orange',
+            'url': reverse('student_app:students_reportcomplete') + f'?date={record.date.strftime("%Y-%m-%d")}'  # URLを追加
         }
         for record in yearly_records
     ]
@@ -105,7 +98,3 @@ def calculate_attendance_stats(records):
         'early_leave_days': early_leave_days,
         'attendance_rate': round(attendance_rate, 2)
     }
-
-def student_event_list(request):
-    events = Event.objects.all()  # すべてのイベントを取得
-    return render(request, 'app/students_event.html', {'events': events})

@@ -1,3 +1,4 @@
+<!-- templates/student_app/event_alert.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,30 +17,25 @@
 
     <!-- メインコンテンツ -->
     <div class="container mt-4">
+        {% if deleted_event %}
         <h2 class="text-center">このイベントは削除されました。</h2>
         <table class="table table-bordered mt-4">
             <tbody>
                 <tr>
                     <td>日付</td>
-                    <td>2024年11月08日(金)</td>
+                    <td>{{ deleted_event.date }}</td>
                 </tr>
                 <tr>
                     <td>時間</td>
-                    <td>09時15分</td>
+                    <td>{{ deleted_event.time }}</td>
                 </tr>
                 <tr>
                     <td>イベント名</td>
-                    <td>test</td>
+                    <td>{{ deleted_event.event_name }}</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <!-- エラーメッセージ表示エリア -->
-    <div class="container mt-2">
-        <div id="error-message" class="alert alert-danger" style="display: none;">
-            すべての項目を入力してください。
-        </div>
+    {% endif %}
     </div>
 
     <!-- 確認ボタン -->

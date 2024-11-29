@@ -14,3 +14,13 @@ class AttendanceRecord(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.attendance_date} - {self.status}"
+    
+# イベント削除
+class DeletedEvent(models.Model):
+    date = models.DateField()
+    time = models.TimeField()
+    event_name = models.CharField(max_length=255)
+    deleted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.event_name

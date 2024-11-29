@@ -19,12 +19,12 @@
         <a href="{% url 'student_home' %}">ホーム</a> > <a href="{% url 'student_app:students_calendar' %}">出席状況</a> > 欠席・遅刻・早退届け
     </div>
 
-    <div class="container mt-4">
+<div class="container mt-4 table-responsive">
         <table class="table table-bordered">
             <tbody>
                 <tr>
                     <td>日付</td>
-                    <td>2024年10月31日(木)</td>
+                    <td>{{ date|date:"Y年m月d日" }}</td>
                 </tr>
                 <tr>
                     <td>状況報告 <span id="status-error" class="text-danger"></span></td>
