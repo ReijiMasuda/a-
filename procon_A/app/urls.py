@@ -13,4 +13,7 @@ urlpatterns = [
     path('students/add_student/', views.add_student, name='add_student'),
     path('event/add/', views.add_event, name='add_event'),  # イベント追加
     path('event/<int:event_id>/delete/', views.delete_event, name='delete_event'),  # イベント削除
+    path('students/', views.student_list, name='student_list'),
+    path('students/add/', views.add_student, name='add_student'),
+    path('students/edit/<int:student_id>/', views.edit_student, name='edit_student'),  # 生徒編集のURL
 ]

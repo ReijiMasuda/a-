@@ -9,6 +9,7 @@ from .models import Student, Attendance, Event
 from django.contrib.auth.decorators import login_required
 
 
+
 def student_login(request):
     if request.method == "POST":
         email = request.POST.get("email")
@@ -131,3 +132,22 @@ def delete_event(request, event_id):
     if request.method == 'POST':
         event.delete()
         return redirect('event')  # イベント一覧ページへリダイレクト
+    
+
+
+def edit_student(request, student_id):
+    # 編集する生徒を取得
+    student = get_object_or_404(Student, id=student_id)
+
+    if request.method == 'POST':
+        # フォーム送信内容を保存
+        form = StudentAddForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')  # 編集後に生徒一覧にリダイレクト
+    else:
+        # 現在の生徒情報をフォームに表示
+        form = StudentAddForm(instance=student)
+
+    return render(request, 'app/edit_student.html', {'form': form, 'student': student})
+

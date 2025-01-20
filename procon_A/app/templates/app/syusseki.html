@@ -27,19 +27,31 @@
         <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > 出席状況
     </div>
     
-    <p>
-    
-    <table>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>生徒名</th>
+                <th>出席状況</th>
+                <th>出席日時</th>
+                <th>操作</th>
+            </tr>
+        </thead>
         <tbody>
-    		{% for attendance in attendances %}
-    	<tr>
-        	<td>{{ attendance.student.name }}</td>
-        	<td>〇</td>
-        	<td>{{ attendance.attendance_time|date:"Y年m月d日 H:i" }}</td>
-    	</tr>
-    		{% endfor %}
-		</tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ attendance.student.name }}</td>
+                <td>〇</td>
+                <td>{{ attendance.attendance_time|date:"Y年m月d日 H:i" }}</td>
+                <td>
+                    <a href="{% url 'edit_attendance' attendance.id %}">編集</a> <!-- 編集リンク -->
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">出席データがありません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
-
 </html>

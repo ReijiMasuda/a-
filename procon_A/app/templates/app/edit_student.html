@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生徒編集</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <p class="welcome-message"><big>生徒管理ページ</big></p>
+        <div class="dropdown">
+            <button>メニュー</button>
+            <div class="dropdown-content">
+                <a href="{% url 'home' %}">ホームに戻る</a>
+                <a href="{% url 'syusseki' %}">出席状況</a>
+                <a href="{% url 'event' %}">イベント確認</a>
+                <a href="{% url 'alert' %}">通知</a>
+                <a href="{% url 'logout' %}"><b>ログアウト</b></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > 
+        <a href="{% url 'students' %}" style="text-decoration: underline;">生徒情報</a> > 生徒編集
+    </div>
+    
+    <body>
+    <h1>生徒編集</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">保存</button>
+        <a href="{% url 'student_list' %}">キャンセル</a>
+    </form>
+    </body>
+    <p>
+</html>
