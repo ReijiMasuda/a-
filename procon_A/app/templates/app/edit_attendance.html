@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出席状況編集</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <p class="welcome-message"><big>出席状況編集</big></p>
+    </div>
+    <div class="breadcrumb" style="text-align: left; margin-left: 1rem; margin-top: 1rem; font-size: 1rem;">
+        <a href="{% url 'home' %}" style="text-decoration: underline;">ホーム</a> > <a href="{% url 'syusseki' %}">出席状況</a> > 出席状況編集
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <h3>{{ student.name }}の出席状況を編集</h3>
+        <label for="status">出席状況:</label>
+        <select name="status" id="status">
+            <option value="〇" {% if attendance.status == '〇' %}selected{% endif %}>出席</option>
+            <option value="△" {% if attendance.status == '△' %}selected{% endif %}>遅刻</option>
+            <option value="×" {% if attendance.status == '×' %}selected{% endif %}>欠席</option>
+        </select>
+        <br>
+        <button type="submit">保存</button>
+    </form>
+</body>
+</html>
