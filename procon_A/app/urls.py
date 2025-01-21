@@ -2,6 +2,7 @@ from django.urls import path
 from .views import syusseki, students, event, alert
 from . import views
 from .views import student_login, student_attendance
+from .views import student_login
 
 urlpatterns = [
     path('syusseki/', syusseki, name='syusseki'),       # Aboutページ
@@ -16,4 +17,7 @@ urlpatterns = [
     path('students/', views.student_list, name='student_list'),
     path('students/add/', views.add_student, name='add_student'),
     path('students/edit/<int:student_id>/', views.edit_student, name='edit_student'),  # 生徒編集のURL
+    path('syusseki/', views.syusseki, name='syusseki'),
+    path('attendance/edit/<int:student_id>/', views.edit_attendance, name='edit_attendance'),
+
 ]

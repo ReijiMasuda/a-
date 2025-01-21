@@ -7,7 +7,41 @@ from django.contrib import messages
 from .forms import StudentAddForm
 from .models import Student, Attendance, Event
 from django.contrib.auth.decorators import login_required
+import datetime
 
+
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentAddForm(request.POST)
+        if form.is_valid():
+            student = form.save(commit=False)
+            student.registration_date = datetime.date.today()  # 現在の日付を設定
+            student.save()  # データベースに保存
+            return redirect('students')
+    else:
+        form = StudentAddForm()
+    return render(request, 'app/students_add.html', {'form': form})
+
+
+# def student_login(request):
+#     if request.method == "POST":
+#         email = request.POST.get("email")
+#         password = request.POST.get("password")
+#         try:
+#             student = Student.objects.get(email=email)
+#             if student.password == password:  # パスワードを直接比較
+#                 request.session['student_id'] = student.id  # student_idをセッションに保存
+
+#                 # 出席情報を保存（必要であれば）
+#                 Attendance.objects.create(student=student, attendance_time=timezone.now())
+
+#                 return redirect('student_attendance')  # 出席登録ページにリダイレクト
+#             else:
+#                 messages.error(request, "ログイン情報が正しくありません。")
+#         except Student.DoesNotExist:
+#             messages.error(request, "ログイン情報が正しくありません。")
+
+#     return render(request, 'app/student_login.html')
 
 
 def student_login(request):
@@ -19,8 +53,12 @@ def student_login(request):
             if student.password == password:  # パスワードを直接比較
                 request.session['student_id'] = student.id  # student_idをセッションに保存
 
-                # 出席情報を保存（必要であれば）
-                Attendance.objects.create(student=student, attendance_time=timezone.now())
+                # 出席情報を取得または作成
+                attendance, created = Attendance.objects.get_or_create(student=student)
+
+                # 新規作成でなくても出席情報を「出席」に更新
+                attendance.status = '〇'  # 出席に設定
+                attendance.save()  # 更新を保存
 
                 return redirect('student_attendance')  # 出席登録ページにリダイレクト
             else:
@@ -29,7 +67,6 @@ def student_login(request):
             messages.error(request, "ログイン情報が正しくありません。")
 
     return render(request, 'app/student_login.html')
-
 
 
 def student_attendance(request):
@@ -48,10 +85,30 @@ def student_attendance(request):
 
     return render(request, 'app/attendance_complete.html')
 
+
 def syusseki(request):
-    # 出席データを取得して表示
-    attendances = Attendance.objects.select_related('student').all()
-    return render(request, 'app/syusseki.html', {'attendances': attendances})
+    # 登録されているすべての生徒を取得
+    students = Student.objects.all()
+
+    # ログイン中の生徒が出席した場合の情報を取得
+    logged_in_student_id = request.session.get('student_id')
+    attendances = Attendance.objects.filter(student__in=students)  # `student_id` ではなく `student` で絞り込み
+
+    # 出席状況を格納
+    student_statuses = []
+    for student in students:
+        attendance = attendances.filter(student=student).first()  # 出席情報を1件取得
+        status = attendance.status if attendance else '×'  # 出席情報がなければデフォルトで欠席
+
+        is_logged_in = student.id == logged_in_student_id
+        student_statuses.append({
+            'student': student,
+            'status': status,
+            'is_logged_in': is_logged_in,
+        })
+
+    return render(request, 'app/syusseki.html', {'student_statuses': student_statuses})
+
 
 def students(request):
     return render(request, 'app/students.html')  # Servicesページ
@@ -62,17 +119,18 @@ def event(request):
 def alert(request):
     return render(request, 'app/alert.html')
 
-# 生徒追加フォームビュー
-def add_student(request):
-    if request.method == 'POST':
-        form = StudentAddForm(request.POST)
-        if form.is_valid():
-            form.save()  # データベースに生徒情報を保存
-            return redirect('students')
-    else:
-        form = StudentAddForm()
+# # 生徒追加フォームビュー
+# def add_student(request):
+#     if request.method == 'POST':
+#         form = StudentAddForm(request.POST)
+#         if form.is_valid():
+#             form.save()  # データベースに生徒情報を保存
+#             return redirect('students')
+#     else:
+#         form = StudentAddForm()
 
-    return render(request, 'app/students_add.html', {'form': form})
+#     return render(request, 'app/students_add.html', {'form': form})
+
 
 def student_list(request):
     # データベースから全ての生徒を取得
@@ -132,7 +190,7 @@ def delete_event(request, event_id):
     if request.method == 'POST':
         event.delete()
         return redirect('event')  # イベント一覧ページへリダイレクト
-    
+
 
 
 def edit_student(request, student_id):
@@ -151,3 +209,21 @@ def edit_student(request, student_id):
 
     return render(request, 'app/edit_student.html', {'form': form, 'student': student})
 
+
+def edit_attendance(request, student_id):
+    # 生徒情報を取得
+    student = get_object_or_404(Student, id=student_id)
+
+    # 出席情報を取得、無ければ新規作成
+    attendance, created = Attendance.objects.get_or_create(student=student)
+
+    if request.method == 'POST':
+        # POSTリクエストがあった場合、出席状況を更新
+        status = request.POST.get('status')
+        attendance.status = status
+        attendance.save()
+
+        messages.success(request, f'{attendance.student.name}の出席状況が更新されました。')
+        return redirect('syusseki')  # 出席状況一覧にリダイレクト
+
+    return render(request, 'app/edit_attendance.html', {'attendance': attendance, 'student': attendance.student})

@@ -7,5 +7,6 @@ class StudentAddForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['name', 'student_id', 'email', 'password']
+        fields = ['name', 'student_id', 'email', 'password', 'registration_date']
+
 
